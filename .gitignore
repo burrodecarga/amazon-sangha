@@ -36,3 +36,4 @@ yarn-error.log*
 _cacache
 .log
 _logs
+_npx
