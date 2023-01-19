@@ -39,7 +39,7 @@ export default function Product({
       </div>
       {hasPrime && (<div className='flex items-center space-x-2 -mt-5'>
         <img className='w-12 ' src="https://links.papareact.com/fdw" alt="" />
-        <p className='text-xs text-gray-500'>FREE NEXT-day delivery</p>
+        <p className='text-xs text-gray-500'>FREE NEXT-day delivery u</p>
       </div>)}
 
       <button className='mt-auto button'>Add to cart</button>
