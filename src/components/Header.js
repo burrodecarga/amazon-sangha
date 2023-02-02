@@ -6,11 +6,16 @@ import {
   Bars4Icon,
 } from '@heroicons/react/24/outline'
 import { useSession, signIn, signOut } from "next-auth/react"
+import {Router, useRouter} from "next/router"
+import { useSelector } from 'react-redux'
+import { selectItems } from '../slices/basketSlice'
 
 
 export default function Header() {
  
   const {data:session} = useSession()
+  const router = useRouter()
+  const items = useSelector(selectItems)
 
   return (
     <header>
@@ -18,6 +23,7 @@ export default function Header() {
         {/* top nav */}
         <div className='flex items-center bg-amazon_blue flex-grow sm:flex-grow-0'>
           <Image
+           onClick={() =>router.push('/')}
             src='/rokave_wr.png'
             width={150}
             height={40}
@@ -47,9 +53,9 @@ export default function Header() {
             <p>Return</p>
             <p className='font-extrabold md:text-sm'>& Orders</p>
           </div>
-          <div className='relative link flex items-center'>
+          <div onClick={()=>router.push('/checkout')} className='relative link flex items-center'>
             <span className='absolute top-0 right-0 md:right-10 w-4 h-4 bg-yellow-400 rounded-full text-center text-black font-bold'>
-              4
+              {items.length}
             </span>
             <ShoppingCartIcon className='h-10' />
             <p className='hidden md:inline font-extrabold md:text-sm md:mt-2'>
