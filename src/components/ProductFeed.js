@@ -32,7 +32,7 @@ export default function ProductFeed({products}) {
 </div>
 {products.slice(5,products.length).map(({id,title,description,price,category,image}) =>(
        <Product
-       key={id}
+       key={`product-${id}`}
        id={id}
        title={title}
        price = {price}

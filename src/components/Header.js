@@ -21,9 +21,9 @@ export default function Header() {
     <header>
       <div className='flex items-center bg-amazon_blue flex-grow p-1'>
         {/* top nav */}
-        <div className='flex items-center bg-amazon_blue flex-grow sm:flex-grow-0'>
+        <div onClick={() =>router.push("/")} className='flex items-center bg-amazon_blue flex-grow sm:flex-grow-0'>
           <Image
-           onClick={() =>router.push('/')}
+           onClick={() =>router.push("/")}
             src='/rokave_wr.png'
             width={150}
             height={40}
@@ -49,9 +49,9 @@ export default function Header() {
            
           </div>
 
-          <div className='link'>
-            <p>Return</p>
-            <p className='font-extrabold md:text-sm'>& Orders</p>
+          <div className='link'  onClick={() =>router.push("/")}>
+            <p onClick={() =>router.push("/")}>Return</p>
+            <p onClick={() =>router.push("/")} className='font-extrabold md:text-sm'>& Orders</p>
           </div>
           <div onClick={()=>router.push('/checkout')} className='relative link flex items-center'>
             <span className='absolute top-0 right-0 md:right-10 w-4 h-4 bg-yellow-400 rounded-full text-center text-black font-bold'>

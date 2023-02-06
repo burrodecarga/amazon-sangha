@@ -2,5 +2,8 @@ module.exports = {
   images:{
     domains:['fakestoreapi.com','links.papareact.com']
   },
-  webpack5: false,
+  env:{
+    stripe_public_key:process.env.STRIPE_PUBLIC_KEY
+  },
+  
 }
