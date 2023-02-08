@@ -15,15 +15,17 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET
 
 const fullfillOrder = async (session)=>{
-console.log('Fullfile order')
-return app.firestore().collection('users').doc(session.metadata.email)
-.collection('orders').doc(session.id).set({
-  amount: session.amount_total/100,
+return app.firestore()
+.collection("users")
+.doc(session.metadata.email)
+.collection("orders")
+.doc(session.id).set({
+  amount: session.amount_total / 100,
   images:JSON.parse(session.metadata.images),
   timestamp: admin.firestore.FieldValue.serverTimestamp()
-}).then(()=>{
+})
+.then(()=>{
   console.log(`Order Id: ${session.id} had been add to DB`)
-
 })
 }
 
@@ -40,14 +42,16 @@ export default async(req, res) => {
    }catch (err){
 
     console.log('ERROR: ',err.message)
-    return res.status(400).send(`webhooks error : ${err.message}`)
+    return res.status(400).send(`webhooks error event Posted from stripe : ${err.message}`)
    }
 
    if(event.type === 'checkout.session.completed'){
      const session = event.data.object
 
-     return fullfillOrder(session).then(() => res.status(200))
-     .catch(err=>res.status(400).send(`webhooks error : ${err.message}`))
+     return fullfillOrder(session)
+     .then(() => res.status(200))
+     .catch(err=>res.status(400)
+     .send(`webhooks error fullFillorder : ${err.message}`))
    }
 
   }
@@ -59,3 +63,6 @@ export const config={
     externalResolver: true,
   }
 }
+
+
+//stripe listen --forward-to localhost:3000/pages/api/webhook
